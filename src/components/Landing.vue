@@ -16,16 +16,25 @@
           v-for= "area in areas"
           :key= "area.meta_mp_sector_id"
           >
-          <router-link v-on:click='selectedArea = area.meta_mp_sector_id' :to="`/area/${area.meta_mp_sector_id}`" >{{ area.meta_parent_sector }}</router-link>
+          <!-- change from router link to clickable table whatevers -->
+          <!-- <router-link v-on:click='selectedArea = area.meta_mp_sector_id' :to="`/area/${area.meta_mp_sector_id}`" >{{ area.meta_parent_sector }}</router-link> -->
+           <button v-on:click="selectArea(area.meta_mp_sector_id)">{{ area.meta_parent_sector }}</button>
           </tr>
         </table>
+         <!-- v show if selcet area id != null  / new component prop passed down for select area id -->
+         <area-details v-if="showDetails() == true" v-bind:selectedArea = 'selectedArea'/>
   </div>
 </template>
 
 <script>
 import areasRoutesService from "../services/areasRoutesService";
+
+import AreaDetails from './AreaDetails.vue';
 export default {
-    name: 'Landing',
+
+  components:
+  {AreaDetails},
+  name: 'Landing',
   data() {
     return {
     selectedArea: '',
@@ -39,12 +48,18 @@ export default {
       (response) => {
         this.areas = response.data;
       }
-    )}
-  // methods: {
-  //   selectArea(id){
-  //     this.selectedArea = id;
-  //   }
-  // }
+    )},
+  methods: {
+    selectArea(id){
+      this.selectedArea = id;
+    },
+    showDetails() {
+      if(this.selectedArea != '') {
+        return true;
+      }
+      return false;
+    }
+  }
 }
 
 </script>
