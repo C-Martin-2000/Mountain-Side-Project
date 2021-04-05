@@ -1,7 +1,25 @@
 
 <template>
   <div>
-      
+      <h1>DETAILS</h1>
+      <table>
+          <tr>
+          <th>AREA NAME</th>
+          <th>LATITUDE</th>
+          <th>LONGITUDE</th>
+          <th>NUMBER OF ROUTES</th>
+          </tr>
+          <tr>
+          <td> {{ details.meta_parent_sector }} </td>
+          <td> {{ details.lat }} </td>
+          <td> {{ details.lng }} </td>
+          <td> {{ details.count }} </td>
+          </tr>
+      </table>
+        <!-- <div>
+        <climbs-list v-bind:climbIds = 'climbIds' />
+        </div>   -->
+
   </div>
 </template>
 
@@ -17,7 +35,8 @@ export default {
     },
     data() {
         return {
-        details: ''
+        details: '',
+        climbIds: ''
         }
     },
     created() {
@@ -25,9 +44,11 @@ export default {
             (response) => {
                 this.details = response.data;
             }
-        )}
+        )},
+    updated() {
+         this.climbIds = this.details.mp_ids.split('|');
+    }
 }
-
 
 </script>
 

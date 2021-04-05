@@ -3,10 +3,13 @@
       <h1>
       Welcome to the mountain-side-project, an inferior app for bad climbers.
       </h1>  
-      <h3>Here is a list of climbing areas near PGH</h3>
+      <h3>Here is a list of climbing areas near You</h3>
         <p>list goes here / needs to ask for location permsisions /
             maybe include map / list items clickable</p>
-        <table>
+            <input type="text" v-model="radius"/>
+            <button v-on:click="getTheStuff()"> search </button>
+        <table v-if="areasEmpty() == false">
+          <!-- <button on:click = searchRadius()> Search </button> -->
           <tr>
             <th>
               Area name
@@ -22,7 +25,7 @@
           </tr>
         </table>
          <!-- v show if selcet area id != null  / new component prop passed down for select area id -->
-         <area-details v-if="showDetails() == true" v-bind:selectedArea = 'selectedArea'/>
+         <area-details v-if="showDetails() == true" v-bind:selectedArea = 'selectedArea' :key="selectedArea"/>
   </div>
 </template>
 
@@ -39,17 +42,31 @@ export default {
     return {
     selectedArea: '',
     areas: [],
-    inputRadius: '',
-    userLocation: ''
+    userLat:'',
+    userLong:'',
+    radius:''
     }
   },
   created() {
-    areasRoutesService.getStuffNearPGH().then(
-      (response) => {
-        this.areas = response.data;
-      }
-    )},
+          navigator.geolocation.getCurrentPosition(
+            position => {
+            console.log(position.coords.latitude);
+            this.userLat = position.coords.latitude;
+            console.log(position.coords.longitude);
+            this.userLong = position.coords.longitude;
+            },
+            error => {
+              console.log(error.message);
+            }
+          );
+    },
   methods: {
+    areasEmpty(){
+      if(this.areas == '') {
+        return true;
+      }
+      return false;
+    },
     selectArea(id){
       this.selectedArea = id;
     },
@@ -58,6 +75,21 @@ export default {
         return true;
       }
       return false;
+    },
+    getTheStuff() {
+      console.log(this.userLat);
+      console.log(this.userLong);
+      console.log(this.radius);
+      // areasRoutesService.getStuffNearPGH().then(
+      var lat = this.userLat;
+      lat = lat.slice(0, 9);
+      var long = this.userLong;
+      long = long.slice(0, 9)
+      areasRoutesService.getStuffNearMe(lat, long, this.radius).then(
+      (response) => {
+        this.areas = response.data;
+        console.log(response.data);
+      })
     }
   }
 }
