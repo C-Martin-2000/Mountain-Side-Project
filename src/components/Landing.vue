@@ -3,7 +3,7 @@
       <h1>
       Welcome to the mountain-side-project, an inferior app for bad climbers.
       </h1>  
-      <h3>Here is a list of climbing areas near You</h3>
+      <h3>Here is a list of climbing areas near <strong>YOU</strong></h3>
         <p>list goes here / needs to ask for location permsisions /
             maybe include map / list items clickable</p>
             <input type="text" v-model="radius"/>
@@ -80,12 +80,12 @@ export default {
       console.log(this.userLat);
       console.log(this.userLong);
       console.log(this.radius);
-      // areasRoutesService.getStuffNearPGH().then(
-      var lat = this.userLat;
-      lat = lat.slice(0, 9);
-      var long = this.userLong;
-      long = long.slice(0, 9)
-      areasRoutesService.getStuffNearMe(lat, long, this.radius).then(
+      // // areasRoutesService.getStuffNearPGH().then(
+      // var lat = this.userLat;
+      // lat = lat.slice(0, 9);
+      // var long = this.userLong;
+      // long = long.slice(0, 9)
+      areasRoutesService.getStuffNearMe(this.userLat, this.userLong, this.radius).then(
       (response) => {
         this.areas = response.data;
         console.log(response.data);

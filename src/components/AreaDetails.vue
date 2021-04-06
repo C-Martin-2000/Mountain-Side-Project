@@ -16,17 +16,19 @@
           <td> {{ details.count }} </td>
           </tr>
       </table>
-        <!-- <div>
-        <climbs-list v-bind:climbIds = 'climbIds' />
-        </div>   -->
+        <div>
+        <climbs-list v-bind:climbIds = 'climbIds' :key= "climbIds" />
+        </div>  
 
   </div>
 </template>
 
 <script>
 import areasRoutesService from "../services/areasRoutesService";
+import ClimbsList from "./ClimbsList.vue";
 
 export default {
+    components: {ClimbsList},
     name: "area-details", 
     props:{
         selectedArea: {
@@ -43,11 +45,16 @@ export default {
         areasRoutesService.getAreaDetailsByID(this.selectedArea).then(
             (response) => {
                 this.details = response.data;
+                // this.climbIds = this.details.mp_ids.split('|');
+                this.climbIds = this.details.mp_ids;
             }
-        )},
-    updated() {
-         this.climbIds = this.details.mp_ids.split('|');
-    }
+        )}
+    // created() {
+    //     this.climbIds = this.details.mp_ids.split('|');
+    //     }
+    // updated() {
+    //      this.climbIds = this.details.mp_ids.split('|');
+    // }
 }
 
 </script>
