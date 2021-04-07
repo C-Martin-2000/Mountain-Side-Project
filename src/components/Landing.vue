@@ -4,10 +4,11 @@
       Welcome to the mountain-side-project, an inferior app for bad climbers.
       </h1>  
       <h3>Here is a list of climbing areas near <strong>YOU</strong></h3>
-        <p>list goes here / needs to ask for location permsisions /
-            maybe include map / list items clickable</p>
+        <p>
+            maybe include map / get address from coordinates if can</p>
+        <h3> Search for climbing areas by radius in km </h3>
             <input type="text" v-model="radius"/>
-            <button v-on:click="getTheStuff()"> search </button>
+            <button v-on:click="getTheStuff()"> GO FIND IT </button>
         <table v-if="areasEmpty() == false">
           <!-- <button on:click = searchRadius()> Search </button> -->
           <tr>
@@ -25,6 +26,7 @@
           </tr>
         </table>
          <!-- v show if selcet area id != null  / new component prop passed down for select area id -->
+         <button v-if="showDetails() == true" v-on:click = hideDetails()> Hide Area </button>
          <area-details v-if="showDetails() == true" v-bind:selectedArea = 'selectedArea' :key="selectedArea"/>
   </div>
 </template>
@@ -75,6 +77,9 @@ export default {
         return true;
       }
       return false;
+    },
+    hideDetails(){
+      this.selectedArea = '';
     },
     getTheStuff() {
       console.log(this.userLat);
