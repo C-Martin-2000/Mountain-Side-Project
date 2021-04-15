@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31129.286
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "mountainsideproject.app", "mountainsideproject.app\mountainsideproject.app.csproj", "{F9D11964-557E-4364-B90C-92EBAFEE8107}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mountiansideproject.api", "mountiansideproject.api\mountiansideproject.api.csproj", "{01C2A1DC-CF3D-454C-90ED-611F1F8EBB32}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F9D11964-557E-4364-B90C-92EBAFEE8107}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9D11964-557E-4364-B90C-92EBAFEE8107}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9D11964-557E-4364-B90C-92EBAFEE8107}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9D11964-557E-4364-B90C-92EBAFEE8107}.Release|Any CPU.Build.0 = Release|Any CPU
+		{01C2A1DC-CF3D-454C-90ED-611F1F8EBB32}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{01C2A1DC-CF3D-454C-90ED-611F1F8EBB32}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{01C2A1DC-CF3D-454C-90ED-611F1F8EBB32}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{01C2A1DC-CF3D-454C-90ED-611F1F8EBB32}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {129EF5F7-AF1F-437C-89FB-405B1C2FDFF5}
+	EndGlobalSection
+EndGlobal
