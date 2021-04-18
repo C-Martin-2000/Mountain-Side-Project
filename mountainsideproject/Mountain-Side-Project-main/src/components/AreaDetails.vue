@@ -1,6 +1,6 @@
 
 <template>
-  <div>
+  <div id = "climbs">
       <h1>DETAILS</h1>
       <table>
           <tr>
@@ -17,7 +17,7 @@
           </tr>
       </table>
         <div>
-        <climbs-list v-bind:climbIds = 'climbIds' :key= "climbIds" />
+            <climbs-list v-bind:climbIds = 'climbIds' :key= "climbIds" />
         </div>  
 
   </div>
@@ -48,7 +48,9 @@ export default {
                 // this.climbIds = this.details.mp_ids.split('|');
                 this.climbIds = this.details.mp_ids;
             }
-        )}
+        )
+        this.hideDetails = false;
+        }
     // created() {
     //     this.climbIds = this.details.mp_ids.split('|');
     //     }
@@ -60,5 +62,8 @@ export default {
 </script>
 
 <style>
+#climbs {
+    margin: 10px;
+}
 
 </style>

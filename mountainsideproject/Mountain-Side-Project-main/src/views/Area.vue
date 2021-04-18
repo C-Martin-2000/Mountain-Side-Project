@@ -1,5 +1,5 @@
 <template>
-  <area-details />
+  <area-details id="main" />
 </template>
 
 <script>
@@ -11,5 +11,8 @@ export default {
 </script>
 
 <style>
-
+#main {
+  display: grid;
+  grid-template-columns: 15% 45% 45%;
+}
 </style>

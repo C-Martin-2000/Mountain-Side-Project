@@ -1,11 +1,17 @@
 <template>
     <div>
-        <table>
+        <ul class = "list-group">
+            <div id="routes" class="btn-group-vertical" role="group">
             <th> Route Names </th>
-                <tr v-for= "climb in climbs"
-                    :key= "climb">
-                    <button v-on:click= showClimbDetails(climb.name)>{{ climb.name }}</button>
-                </tr>
+                
+                <li v-for= "climb in climbs"
+                    :key= "climb"
+                    class= "list-group-item">
+                    
+                        <button id ="button" class= "btn btn-primary" v-on:click= showClimbDetails(climb.name)>{{ climb.name }}</button>
+                    
+                </li>
+                </div>
                     <table v-if="show == true">
                             <th> ROUTE NAME </th>
                             <th> RATING </th>
@@ -17,7 +23,7 @@
                         </tr>
                         <button v-on:click="show =false"> Hide Details </button>
                     </table>
-        </table>
+        </ul>
     </div>
   
 </template>
@@ -65,5 +71,25 @@ export default {
 </script>
 
 <style>
+    #routes {
+        display:flex;
+        align-items: center;
+        width: 50%;
+    }
 
+    #button {
+        width:100%;
+        margin: 0%;
+        border: 0%;
+    }
+    .list-group-item {
+        width:100%;
+        margin: 0%;
+        border: 0%;
+        padding: 5px 5px 5px 5px;
+    }
+    .list-group {
+        align-items: center;
+        overflow-y:auto;
+    }
 </style>
