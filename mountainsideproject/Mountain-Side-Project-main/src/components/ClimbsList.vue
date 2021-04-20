@@ -4,7 +4,7 @@
             <div id="routes" class="btn-group-vertical" role="group">
             <th> Route Names </th>
                 
-                <li v-for= "climb in climbs"
+                <li v-for= "climb in this.$store.state.climbs"
                     :key= "climb"
                     class= "list-group-item">
                     
@@ -12,17 +12,7 @@
                     
                 </li>
                 </div>
-                    <table v-if="show == true">
-                            <th> ROUTE NAME </th>
-                            <th> RATING </th>
-                            <th> TYPE </th>
-                        <tr :key = 'selected'>
-                            <td> {{ selected.name }} </td>
-                            <td> {{ selected.yds }} </td>
-                            <td> {{ selected.type }} </td>
-                        </tr>
-                        <button v-on:click="show =false"> Hide Details </button>
-                    </table>
+                    
         </ul>
     </div>
   
@@ -42,29 +32,33 @@ export default {
     data() {
         return {
             climbs: [],
+            selectedClimb: '',
             selected: [],
-            show: false
         }
     },
     methods: {
         showClimbDetails(name){
+            this.climbs = this.$store.state.climbs;
             this.climbs.forEach(climb => {
                 if(climb.name == name) {
-                    this.selected = climb;
-                    this.show = true;
-                }
-            });
-        }
-    },
-    created() {
-        console.log("here");
-                areasRoutesService.getClimbDetailsById(this.climbIds).then(
+                    if(this.$store.state.selectedClimb != null && this.$store.state.selectedClimb[0].name == name) {
+                        return this.$store.commit("SET_SELECTED_CLIMB", null);
+                    }
+                    areasRoutesService.getClimbDetailsById(climb.meta_mp_route_id).then(
                     (response) => {
                         console.log(response.data);
-                        this.climbs = response.data;
-                    }
-                )
-            }
+                        this.selectedClimb = response.data;
+                        this.$store.commit("SET_SELECTED_CLIMB", this.selectedClimb);
+                    })
+                }
+            });
+            
+        },
+    // created() {
+    //     this.$store.commit("SET_SELECTED_CLIMB", null);
+    // }
+    },
+   
         
     
 }
